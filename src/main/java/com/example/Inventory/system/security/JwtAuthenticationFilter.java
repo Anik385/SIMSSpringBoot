@@ -46,12 +46,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
-        // ✅ Skip token validation for public endpoints (login, register, etc.)
         String path = request.getRequestURI();
-        if (path.startsWith("/api/v1/auth/") || path.startsWith("/swagger-ui") || path.startsWith("/api-docs") || path.startsWith("/ws")) {
+        if (path.startsWith("/api/v1/auth/") || path.startsWith("/ws/") || path.startsWith("/swagger-ui") || path.startsWith("/api-docs")) {
             filterChain.doFilter(request, response);
             return;
         }
+
+        // ✅ Skip token validation for public endpoints (login, register, etc.)
+//        String path = request.getRequestURI();
+//        if (path.startsWith("/api/v1/auth/") || path.startsWith("/swagger-ui") || path.startsWith("/api-docs") || path.startsWith("/ws")) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
