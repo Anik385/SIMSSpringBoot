@@ -14,7 +14,8 @@ public record ProductRequest(
         @NotNull @Min(0) BigDecimal price,
         @NotNull @Min(0) Integer quantity,
         Integer reorderThreshold,
-        Long locationId
+        Long locationId,
+        Long categoryId
 
 ) {
 }

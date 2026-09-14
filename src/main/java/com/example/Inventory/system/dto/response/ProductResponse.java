@@ -12,6 +12,7 @@ public record ProductResponse(
         Integer quantity,
         Integer reorderThreshold,
         Long locationId,
-        String locationDescription
+        String locationDescription,
+        Long categoryId
 ) {
 }
