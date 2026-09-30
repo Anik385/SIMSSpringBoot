@@ -42,6 +42,9 @@ public class Product {
     @JoinColumn(name = "location_id")
     private Location location;
 
+    @Column(name = "category")
+    private String category;
+
     @Column(name = "category_id")
     private Long categoryId;
 

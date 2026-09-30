@@ -2,6 +2,7 @@ package com.example.Inventory.system.repository;
 
 import com.example.Inventory.system.entity.Sale;
 import com.example.Inventory.system.entity.SaleStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -6,10 +6,13 @@ import com.example.Inventory.system.entity.Product;
 import org.mapstruct.*;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring",
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ProductMapper {
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "location", expression = "java(location)")
+    @Mapping(target = "categoryId", ignore = true)   // ✅ set manually in service
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Product toEntity(ProductRequest request, @Context Location location);
@@ -20,7 +23,10 @@ public interface ProductMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "location", expression = "java(location)")
+    @Mapping(target = "categoryId", ignore = true)   // ✅ set manually in service
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    void updateEntity(@MappingTarget Product product, ProductRequest request, @Context Location location);
+    void updateEntity(@MappingTarget Product product,
+                      ProductRequest request,
+                      @Context Location location);
 }

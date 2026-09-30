@@ -21,9 +21,19 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.quantity <= p.reorderThreshold ORDER BY p.quantity ASC")
     List<Product> findLowStockProductsOrdered();
 
-    @Query("SELECT p.category, COUNT(p), COALESCE(SUM(p.quantity), 0) " +
-            "FROM Product p GROUP BY p.category")
+    // New (uses the actual entity field)
+//    @Query("SELECT p.categoryId, COUNT(p), COALESCE(SUM(p.quantity), 0) " +
+//            "FROM Product p GROUP BY p.categoryId")
+//    List<Object[]> findCategoryStockSummary();
+
+    @Query("SELECT c.name, COUNT(p), COALESCE(SUM(p.quantity), 0) " +
+            "FROM Product p LEFT JOIN Category c ON p.categoryId = c.id " +
+            "GROUP BY c.name")
     List<Object[]> findCategoryStockSummary();
+
+//    @Query("SELECT p.category, COUNT(p), COALESCE(SUM(p.quantity), 0) " +
+//            "FROM Product p GROUP BY p.category")
+//    List<Object[]> findCategoryStockSummary();
 
 //    @Query("SELECT p FROM Product p WHERE p.quantity <= p.reorderThreshold")
 //    List<Product> findLowStockProducts();   // Keep this name or rename as you like
