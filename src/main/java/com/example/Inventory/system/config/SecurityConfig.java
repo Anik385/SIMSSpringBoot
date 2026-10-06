@@ -46,6 +46,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/api-docs/**",
                                 "/v3/api-docs/**",
+                                "/ws-native/**",
                                 "/ws/**"  // WebSocket handshake
                         ).permitAll()
                         .anyRequest().authenticated()

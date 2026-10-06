@@ -12,8 +12,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        // 1) Raw WebSocket for Flutter / mobile
+        registry.addEndpoint("/ws-native")
+                .setAllowedOriginPatterns("*");
+
+        // 2) SockJS for Angular web (keeps your existing frontend working)
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("*")   // ✅ Allow all origins
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 
@@ -25,8 +30,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //    }
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/app");
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        config.enableSimpleBroker("/topic");
+        config.setApplicationDestinationPrefixes("/app");
     }
 }
